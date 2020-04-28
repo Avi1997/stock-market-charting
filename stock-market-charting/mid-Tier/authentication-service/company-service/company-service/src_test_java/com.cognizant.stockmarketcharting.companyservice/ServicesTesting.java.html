@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ServicesTesting.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ServicesTesting (19 Dec, 2019 7:29:33 PM)</a> &gt; <a href="../../index.html" class="el_group">company-service</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.cognizant.stockmarketcharting.companyservice</a> &gt; <span class="el_source">ServicesTesting.java</span></div><h1>ServicesTesting.java</h1><pre class="source lang-java linenums">package com.cognizant.stockmarketcharting.companyservice;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.cognizant.stockmarket.companyservice.model.BoardOfDirectors;
+import com.cognizant.stockmarket.companyservice.model.Company;
+import com.cognizant.stockmarket.companyservice.model.Sector;
+import com.cognizant.stockmarket.companyservice.model.StockExchange;
+import com.cognizant.stockmarket.companyservice.repository.CompanyRepository;
+import com.cognizant.stockmarket.companyservice.service.CompanyServiceImpl;
+
+
+
+@SpringBootTest()
+@RunWith(MockitoJUnitRunner.class)
+<span class="fc" id="L27">public class ServicesTesting {</span>
+
+<span class="fc" id="L29">	CompanyRepository companyRepository = Mockito.mock(CompanyRepository.class);</span>
+	
+	
+<span class="fc" id="L32">	CompanyServiceImpl companyService = new CompanyServiceImpl(companyRepository);</span>
+	
+	public Company createCompany() { 
+<span class="fc" id="L35">		BoardOfDirectors boardOfDirectors = new BoardOfDirectors(1,&quot;mackinson&quot;,1); </span>
+<span class="fc" id="L36">		Set&lt;BoardOfDirectors&gt; listOfDirectors = new HashSet&lt;BoardOfDirectors&gt;();</span>
+<span class="fc" id="L37">		listOfDirectors.add(boardOfDirectors);</span>
+<span class="fc" id="L38">		StockExchange stockExchange = new StockExchange(1,&quot;BSE&quot;,&quot;Bombay&quot;,&quot;nill&quot;,&quot;nill&quot;);</span>
+<span class="fc" id="L39">		Set&lt;StockExchange&gt; stockExchangeList = new HashSet&lt;StockExchange&gt;();</span>
+<span class="fc" id="L40">		stockExchangeList.add(stockExchange);</span>
+<span class="fc" id="L41">		Sector sector = new Sector(1,&quot;Banking&quot;,&quot;bank&quot;);</span>
+<span class="fc" id="L42">		Company company = new Company(1,500112L,&quot;BOI&quot;,54123L,&quot;guru&quot;,listOfDirectors,true,sector,&quot;nil&quot;, stockExchangeList);</span>
+<span class="fc" id="L43">		return company;</span>
+		}
+	
+	public List&lt;Company&gt; createCompanyList(){
+<span class="fc" id="L47">		List&lt;Company&gt; companyList = new ArrayList&lt;Company&gt;();</span>
+<span class="fc" id="L48">		companyList.add(createCompany());</span>
+<span class="fc" id="L49">		return companyList;</span>
+	}
+	
+	@Test
+	public void mockGetAllCompanies() {
+<span class="fc" id="L54">		when(companyRepository.findAll()).thenReturn(createCompanyList());</span>
+<span class="fc" id="L55">		List&lt;Company&gt; companyList = companyService.findAllCompanies();</span>
+<span class="fc" id="L56">		assertEquals(companyList.get(0).getCeo(), createCompanyList().get(0).getCeo());</span>
+<span class="fc" id="L57">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>ServicesTesting (19 Dec, 2019 7:29:33 PM)</div></body></html>

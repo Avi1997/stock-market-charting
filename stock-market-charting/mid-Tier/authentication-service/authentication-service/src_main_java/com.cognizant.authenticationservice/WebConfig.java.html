@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>WebConfig.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (19 Dec, 2019 7:28:50 PM)</a> &gt; <a href="../../index.html" class="el_group">authentication-service</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.cognizant.authenticationservice</a> &gt; <span class="el_source">WebConfig.java</span></div><h1>WebConfig.java</h1><pre class="source lang-java linenums">package com.cognizant.authenticationservice;
+
+import java.util.Properties;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+<span class="fc" id="L14">public class WebConfig implements WebMvcConfigurer {</span>
+
+<span class="fc" id="L16">	private static final Logger LOGGER = LoggerFactory.getLogger(WebConfig.class);</span>
+
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+<span class="fc" id="L20">		LOGGER.info(&quot;EMAIL CONFIG START&quot;);</span>
+<span class="fc" id="L21">		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();</span>
+<span class="fc" id="L22">		mailSender.setHost(&quot;smtp.gmail.com&quot;);</span>
+<span class="fc" id="L23">		mailSender.setPort(587);</span>
+<span class="fc" id="L24">		mailSender.setUsername(&quot;ctstestmail10@gmail.com&quot;);</span>
+<span class="fc" id="L25">		mailSender.setPassword(&quot;ftwdzvztccnthugz&quot;);</span>
+
+<span class="fc" id="L27">		Properties props = mailSender.getJavaMailProperties();</span>
+<span class="fc" id="L28">		props.put(&quot;mail.transport.protocol&quot;, &quot;smtp&quot;);</span>
+<span class="fc" id="L29">		props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L30">		props.put(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L31">		props.put(&quot;mail.debug&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L32">		LOGGER.info(&quot;EMAIL CONFIG END&quot;);</span>
+
+<span class="fc" id="L34">		return mailSender;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Merged (19 Dec, 2019 7:28:50 PM)</div></body></html>

@@ -1,0 +1,107 @@
+<div class=" container extra-margin-top-hospital">
+        <div class="alert alert-success mt-4" role="alert" *ngIf="successMsg">
+                <strong>
+                  Details Changed Successfully !!
+                  <button (click)="changeFlag()" class="btn btn-link">
+                    click here
+                  </button>
+                  to go back.
+                </strong>
+        </div>
+    <div class="card text-center shadow" *ngIf="!successMsg">
+        <div class="card-header text-muted">
+            Personal Details
+        </div>
+        <div class="card-body">
+            <img src="https://cdn.onlinewebfonts.com/svg/img_184513.png" class="card-image mb-3" alt="error" height="150px"/>
+            <h4 class="card-title text-uppercase"><strong class="mr-2">Username :</strong>{{user.username}}</h4>
+            <h5 class="card-title">{{user.email}}</h5>
+            <div class="card-text">
+                <div [formGroup]="signupForm">
+                  <div class="form-row ml-2 mr-2" >
+                        <div class="col-sm-12 col-md-6  mt-4 mb-3">
+                            <strong for="contactnumber">Contact Number </strong>
+                        </div>
+                        <div class="col-sm-12 col-md-6  mt-4 mb-3">
+                            <span *ngIf="contactFlag;else elseBlockContactNumber">
+                                <input type="text" class="form-control " placeholder="Enter Contact Number"
+                                    name="contactNo" formControlName="contactNo" id="contactnumber"
+                                    onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                    [ngClass]="{
+                                                                    'border border-danger': 
+                                                                                  signupForm.get('contactNo').errors?.required
+                                                                                 || signupForm.get('contactNo').errors?.minlength
+                                                                                 || signupForm.get('contactNo').errors?.maxlength,
+                                                                    '':
+                                                                        !signupForm.get('contactNo').errors?.required  
+                                                                        || !signupForm.get('contactNo').errors?.minlength 
+                                                                        || !signupForm.get('contactNo').errors?.maxlength
+                                          }" />
+
+                                <div class="text-danger position-absolute small"
+                                    *ngIf="signupForm.get('contactNo').errors?.minlength || signupForm.get('contactNo').errors?.maxlength">
+                                    Contact Number should be of 10 digits!
+                                </div>
+                                <div class="text-danger position-absolute small"
+                                    *ngIf="signupForm.get('contactNo').errors?.required">
+                                    Contact Number is required
+                                </div>
+                            </span>
+                            <ng-template #elseBlockContactNumber>
+                                    {{user.contactNumber}}
+                                    <button class="btn btn-link" (click)="changeContactFlag()" >
+                                            change</button>
+                            </ng-template>
+                        </div>
+                    </div>
+
+                    <div class="form-row ml-2 mr-2 mb-4" *ngIf="passwordFlag; else elseBlockPassword">
+                        <div class="col-sm-12 col-md-6 mt-4">
+                            <strong>
+                                Enter New Password
+                            </strong>
+                            
+                       </div>
+
+                        <div class="col-sm-12 col-md-6  mt-4">
+                            <span>
+                                <input type="password" class="form-control " placeholder="Enter Password"
+                                    name="password" formControlName="password" id="password"
+                                     [ngClass]="{
+                                                            'border border-danger':
+                                                                     signupForm.get('password').errors?.required 
+                                                                     || signupForm.get('password').errors?.minlength 
+                                                                     || signupForm.get('password').errors?.maxlength, 
+                                                             '':
+                                                              !signupForm.get('password').errors?.required 
+                                                              || !signupForm.get('password').errors?.minlength
+                                                              || !signupForm.get('password').errors?.maxlength
+                                          }" />
+
+                                <div>
+                                    <div class=" position-absolute small text-danger"
+                                        *ngIf="signupForm.get('password').errors?.minlength || signupForm.get('password').errors?.maxlength">
+                                        Password should be between 4 & 15!
+                                    </div>
+
+                                    <div class="text-danger position-absolute small"
+                                        *ngIf="signupForm.get('password').errors?.required">
+                                        Password is required!
+                                    </div>
+                                </div>
+                            </span>                            
+                        </div>
+                        
+                    </div>
+                    <ng-template #elseBlockPassword class="form-row ml-2 mr-2 mb-4">
+                            <button class="btn btn-link" (click)="changePasswordFlag()">change Password</button>
+                        </ng-template>
+
+                </div>
+                <button class="btn btn-secondary mb-3" (click)="changeDetails()" [disabled]="!signupForm.valid" *ngIf="submitFlag">submit</button>
+            </div>
+            <div class="card-footer text-muted">
+                User Details
+            </div>
+        </div>
+    </div>

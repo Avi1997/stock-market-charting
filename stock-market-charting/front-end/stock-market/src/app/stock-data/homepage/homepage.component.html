@@ -1,0 +1,41 @@
+<div class="container extra-margin-top-hospital extra-margin-bottom ">
+<div class="card-deck ">
+    <div class="card  border-0 text-center" *ngIf="getRole() !='USER'" >
+      <img src="https://testersdock.com/wp-content/uploads/2017/09/file-upload-1280x640.png" height="300px" class="card-img-top" alt="error">
+      <div class="card-body">
+        <h5 class="card-title">Upload Stock Price</h5>
+        <p class="card-text">Upload the excel files Data to the Database.</p>
+        
+        <a routerLink="/upload" class="btn btn-secondary ">upload</a>
+    </div>
+    </div>
+    <div class="card border-0 text-center" *ngIf="getRole() !='ADMIN'">
+            <img src="https://greenlivingblogorguk.files.wordpress.com/2012/12/fotolia_32489228_xs.jpg" height="300px" class="card-img-top" alt="error">
+      
+      <div class="card-body">
+        <h5 class="card-title">Show Chart </h5>
+        <p class="card-text">Shows the Details of the Company stock in a chart. </p>
+        
+        <a class="btn btn-secondary" routerLink="/chart"> chart</a>
+      </div>
+    </div>
+    <div class="card border-0 text-center">
+      <img src="https://images.vexels.com/media/users/3/144882/isolated/preview/a98fa07f09c1d45d26405fa48c344428-company-building-silhouette-by-vexels.png" height="300px" class="card-img-top" alt="error">
+      <div class="card-body">
+        <h5 class="card-title">Companies</h5>
+        <p class="card-text">Information about the Companies.</p>
+        
+        <button class="btn btn-secondary " routerLink="/company">show</button>
+      </div>
+    </div>
+    <div class="card border-0 text-center" *ngIf="isLogin() && getRole() == 'USER'">
+        <img src="https://i.pinimg.com/originals/47/75/09/477509fe044b5825574b05ba3adc121d.jpg" height="300px" class="card-img-top" alt="error">
+        <div class="card-body">
+          <h5 class="card-title">Compare Charts</h5>
+          <p class="card-text">Compare Companies Stock Price.</p>
+          
+          <button class="btn btn-secondary " routerLink="/compare-chart">Compare</button>
+        </div>
+      </div>
+  </div>
+  </div>

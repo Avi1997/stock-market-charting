@@ -1,0 +1,114 @@
+.nav-link{
+	border-bottom:solid 3px #581845 ;
+}
+.nav-link:hover{
+	border-bottom:solid 3px #F8F9F9 ;
+}
+
+.material-icons {
+	vertical-align: middle;
+}
+.outline-none:focus {
+	outline: none;
+}
+.color-nav {
+	background-color: #581845;
+}
+.btn-secondary{
+	color: #f8f8f8;
+	background-color:#581845;
+}
+.btn-secondary:hover{
+	background-color:#F8F9F9;
+	color: #581845;
+}
+.bg-search{
+    background-image:url("https://ak6.picdn.net/shutterstock/videos/1008538756/thumb/1.jpg") ;
+    background-size: 100% 100%;
+}
+
+.bs-datepicker-head,
+.bs-datepicker-head, .bs-datepicker button:active,
+.bs-datepicker-body table td span.selected,
+.bs-datepicker-body table td.selected span,
+.bs-datepicker-body table td span[class*="select-"]:after,
+.bs-datepicker-body table td[class*="select-"] span:after,
+.bs-datepicker-body table td.active-week span:hover 
+{
+  background-color: #581845 !important; 
+}
+
+.bs-datepicker-body table td.week span 
+{
+  color:#581845 !important; 
+}
+@media screen and (max-width:826px){
+	.extra-margin-top {
+		margin-top: 50px;
+	}
+	.extra-margin-top-tip-btn {
+		margin-top: 50px;
+	}
+	.extra-margin-top-btn{
+		margin-top: 8px;
+	}
+	.extra-margin-top-hospital{
+		margin-top: 95px;
+	}
+	
+	.extra-margin-bottom {
+		margin-bottom: 90px;
+	}
+	.jumbotron {		
+		background-position: center;
+		background-size: 100% 100%;
+		border-radius: 0;
+	}
+
+}
+
+@media screen and (min-width:826px){
+	.extra-margin-top {
+		margin-top: 68px;
+	}
+	.extra-margin-top-tip-btn {
+		margin-top: 140px;
+	}
+	.extra-margin-top-hospital{
+		margin-top: 150px;
+	}
+	.extra-margin-bottom {
+		margin-bottom: 95px;
+	}
+	.jumbotron {
+		background-position: center;
+		background-size: 100% 100% ;
+		border-radius: 0;
+	
+	}
+}
+
+
+
+ 
+@media screen and (max-width:769px){
+	.font-sm-less{
+		font-size: 10px;
+	}
+	.font-sm-extraless{
+	  font-size: 18px;
+  }
+  .change-height{
+	  height: 320px;
+  }
+	
+}
+@media screen and (min-width:769px){
+  .font-sm-less{
+	  font-size: 14px;
+  }
+ 
+.change-height{
+	height: 400px;
+}
+}

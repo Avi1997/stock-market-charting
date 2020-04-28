@@ -1,0 +1,18 @@
+<div class="jumbotron extra-margin-top bg-search">
+    <h1 class="text-white container"> Search Company</h1>
+    <div class="input-group container">
+   
+    <input
+            type="text" 
+            class="form-control" 
+            placeholder="Enter Company code or name" 
+            (keyup)="seachCompany()"
+            [(ngModel)]="search"
+            name="search"/>
+</div>
+</div>
+
+
+<app-company-view [companies]="companies" [emptyFlag]="emptyFlag" [searchFlag]="searchFlag"></app-company-view>
+
+

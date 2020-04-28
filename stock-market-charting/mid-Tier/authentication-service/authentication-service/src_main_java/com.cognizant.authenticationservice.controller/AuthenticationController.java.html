@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AuthenticationController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (19 Dec, 2019 7:28:50 PM)</a> &gt; <a href="../../index.html" class="el_group">authentication-service</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.cognizant.authenticationservice.controller</a> &gt; <span class="el_source">AuthenticationController.java</span></div><h1>AuthenticationController.java</h1><pre class="source lang-java linenums">package com.cognizant.authenticationservice.controller;
+
+import java.util.Base64;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cognizant.authenticationservice.model.User;
+import com.cognizant.authenticationservice.repository.UserRepository;
+
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+@RestController
+@RequestMapping(&quot;/stock-market&quot;)
+<span class="fc" id="L27">public class AuthenticationController {</span>
+
+<span class="fc" id="L29">	private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationController.class);</span>
+	@Autowired
+	UserRepository userRepository;
+
+	@GetMapping(&quot;/authenticate&quot;)
+	public Map&lt;String, String&gt; authenticate(@RequestHeader(&quot;Authorization&quot;) String authHeader) {
+<span class="nc" id="L35">		LOGGER.info(&quot;Authenticate START&quot;);</span>
+<span class="nc" id="L36">		LOGGER.debug(&quot;authHeader : {}&quot;, authHeader);</span>
+<span class="nc" id="L37">		Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</span>
+
+<span class="nc" id="L39">		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();</span>
+<span class="nc" id="L40">		String role = authentication.getAuthorities().toArray()[0].toString();</span>
+<span class="nc" id="L41">		String username = authentication.getName();</span>
+<span class="nc" id="L42">		map.put(&quot;token&quot;, generateJwt(getUser(authHeader)));</span>
+<span class="nc" id="L43">		map.put(&quot;role&quot;, role);</span>
+<span class="nc" id="L44">		map.put(&quot;user&quot;, username);</span>
+<span class="nc" id="L45">		User user = userRepository.findByUsername(username);</span>
+<span class="nc" id="L46">		map.put(&quot;confirm&quot;, &quot;&quot; + user.isConfirm());</span>
+<span class="nc" id="L47">		LOGGER.debug(&quot;map: {}&quot;, map);</span>
+<span class="nc" id="L48">		LOGGER.info(&quot;Authenticate END&quot;);</span>
+<span class="nc" id="L49">		return map;</span>
+	}
+
+	private String getUser(String authHeader) {
+<span class="nc" id="L53">		LOGGER.info(&quot;START&quot;);</span>
+<span class="nc" id="L54">		String encodedCredentials = authHeader.split(&quot; &quot;)[1];</span>
+<span class="nc" id="L55">		String decodedCredentials = new String(Base64.getDecoder().decode(encodedCredentials));</span>
+<span class="nc" id="L56">		String user = decodedCredentials.split(&quot;:&quot;)[0];</span>
+<span class="nc" id="L57">		LOGGER.debug(&quot;user : {}&quot;, user);</span>
+<span class="nc" id="L58">		LOGGER.info(&quot;END&quot;);</span>
+<span class="nc" id="L59">		return user;</span>
+	}
+
+	private String generateJwt(String user) {
+<span class="nc" id="L63">		LOGGER.info(&quot;START&quot;);</span>
+<span class="nc" id="L64">		JwtBuilder builder = Jwts.builder();</span>
+<span class="nc" id="L65">		builder.setSubject(user);</span>
+<span class="nc" id="L66">		builder.setIssuedAt(new Date());</span>
+<span class="nc" id="L67">		builder.setExpiration(new Date((new Date()).getTime() + 1200000));</span>
+<span class="nc" id="L68">		builder.signWith(SignatureAlgorithm.HS256, &quot;secretkey&quot;);</span>
+<span class="nc" id="L69">		String token = builder.compact();</span>
+<span class="nc" id="L70">		LOGGER.debug(&quot;token : {}&quot;, token);</span>
+<span class="nc" id="L71">		LOGGER.info(&quot;END&quot;);</span>
+<span class="nc" id="L72">		return token;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Merged (19 Dec, 2019 7:28:50 PM)</div></body></html>

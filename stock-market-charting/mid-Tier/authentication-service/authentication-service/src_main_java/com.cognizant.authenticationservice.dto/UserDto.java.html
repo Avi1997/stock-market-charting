@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserDto.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (19 Dec, 2019 7:28:50 PM)</a> &gt; <a href="../../index.html" class="el_group">authentication-service</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.cognizant.authenticationservice.dto</a> &gt; <span class="el_source">UserDto.java</span></div><h1>UserDto.java</h1><pre class="source lang-java linenums">package com.cognizant.authenticationservice.dto;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+public class UserDto {
+	@NotNull
+	@Size(min = 4, message = &quot;Atleast 4 characters are required&quot;)
+	String username;
+	@NotNull
+	String password;
+	@NotNull
+	String email;
+	@NotNull
+	String contactNumber;
+	private int role;
+
+	public UserDto() {
+<span class="fc" id="L19">		super();</span>
+<span class="fc" id="L20">	}</span>
+
+	public UserDto(String username, String password, String email, String contactNumber) {
+<span class="fc" id="L23">		super();</span>
+<span class="fc" id="L24">		this.username = username;</span>
+<span class="fc" id="L25">		this.password = password;</span>
+<span class="fc" id="L26">		this.email = email;</span>
+<span class="fc" id="L27">		this.contactNumber = contactNumber;</span>
+<span class="fc" id="L28">	}</span>
+
+	public UserDto(@NotNull @Size(min = 4, message = &quot;Atleast 4 characters are required&quot;) String username,
+			@NotNull String password, @NotNull String email, @NotNull String contactNumber, int role) {
+<span class="fc" id="L32">		super();</span>
+<span class="fc" id="L33">		this.username = username;</span>
+<span class="fc" id="L34">		this.password = password;</span>
+<span class="fc" id="L35">		this.email = email;</span>
+<span class="fc" id="L36">		this.contactNumber = contactNumber;</span>
+<span class="fc" id="L37">		this.role = role;</span>
+<span class="fc" id="L38">	}</span>
+
+	public String getUsername() {
+<span class="fc" id="L41">		return username;</span>
+	}
+
+	public void setUsername(String username) {
+<span class="fc" id="L45">		this.username = username;</span>
+<span class="fc" id="L46">	}</span>
+
+	public String getPassword() {
+<span class="fc" id="L49">		return password;</span>
+	}
+
+	public void setPassword(String password) {
+<span class="fc" id="L53">		this.password = password;</span>
+<span class="fc" id="L54">	}</span>
+
+	public String getEmail() {
+<span class="fc" id="L57">		return email;</span>
+	}
+
+	public void setEmail(String email) {
+<span class="fc" id="L61">		this.email = email;</span>
+<span class="fc" id="L62">	}</span>
+
+	public String getContactNumber() {
+<span class="fc" id="L65">		return contactNumber;</span>
+	}
+
+	public void setContactNumber(String contactNumber) {
+<span class="fc" id="L69">		this.contactNumber = contactNumber;</span>
+<span class="fc" id="L70">	}</span>
+
+	public int getRole() {
+<span class="fc" id="L73">		return role;</span>
+	}
+
+	public void setRole(int role) {
+<span class="fc" id="L77">		this.role = role;</span>
+<span class="fc" id="L78">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Merged (19 Dec, 2019 7:28:50 PM)</div></body></html>

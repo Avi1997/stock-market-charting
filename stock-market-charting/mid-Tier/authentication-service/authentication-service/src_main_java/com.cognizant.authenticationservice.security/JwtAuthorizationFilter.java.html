@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>JwtAuthorizationFilter.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (19 Dec, 2019 7:28:50 PM)</a> &gt; <a href="../../index.html" class="el_group">authentication-service</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.cognizant.authenticationservice.security</a> &gt; <span class="el_source">JwtAuthorizationFilter.java</span></div><h1>JwtAuthorizationFilter.java</h1><pre class="source lang-java linenums">package com.cognizant.authenticationservice.security;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+
+public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
+<span class="fc" id="L24">	private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthorizationFilter.class);</span>
+
+	public JwtAuthorizationFilter(AuthenticationManager authenticationManager) {
+<span class="fc" id="L27">		super(authenticationManager);</span>
+<span class="fc" id="L28">		LOGGER.info(&quot;JwtAuthorizationFilter START&quot;);</span>
+<span class="fc" id="L29">		LOGGER.debug(&quot;authenticationManager : {}&quot;, authenticationManager);</span>
+<span class="fc" id="L30">		LOGGER.info(&quot;JwtAuthorizationFilter END&quot;);</span>
+<span class="fc" id="L31">	}</span>
+
+	@Override
+	protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
+			throws IOException, ServletException {
+<span class="fc" id="L36">		LOGGER.info(&quot;doFilterInternal START&quot;);</span>
+<span class="fc" id="L37">		String header = req.getHeader(&quot;Authorization&quot;);</span>
+<span class="fc" id="L38">		LOGGER.debug(&quot;header : {}&quot;, header);</span>
+
+<span class="pc bpc" id="L40" title="3 of 4 branches missed.">		if (header == null || !header.startsWith(&quot;Bearer &quot;)) {</span>
+<span class="fc" id="L41">			LOGGER.debug(&quot;header null IN&quot;);</span>
+<span class="fc" id="L42">			chain.doFilter(req, res);</span>
+<span class="fc" id="L43">			return;</span>
+		}
+<span class="nc" id="L45">		LOGGER.debug(&quot;header null OUT&quot;);</span>
+<span class="nc" id="L46">		UsernamePasswordAuthenticationToken authentication = getAuthentication(req);</span>
+<span class="nc" id="L47">		SecurityContextHolder.getContext().setAuthentication(authentication);</span>
+<span class="nc" id="L48">		chain.doFilter(req, res);</span>
+<span class="nc" id="L49">		LOGGER.info(&quot;doFilterInternal END&quot;);</span>
+<span class="nc" id="L50">	}</span>
+
+	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+<span class="nc" id="L53">		LOGGER.info(&quot;UsernamePasswordAuthenticationToken START&quot;);</span>
+<span class="nc" id="L54">		String token = request.getHeader(&quot;Authorization&quot;);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">		if (token != null) {</span>
+			Jws&lt;Claims&gt; jws;
+			try {
+<span class="nc" id="L58">				jws = Jwts.parser().setSigningKey(&quot;secretkey&quot;).parseClaimsJws(token.replace(&quot;Bearer &quot;, &quot;&quot;));</span>
+<span class="nc" id="L59">				String user = jws.getBody().getSubject();</span>
+<span class="nc" id="L60">				LOGGER.debug(&quot;user : {}&quot;, user);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">				if (user != null) {</span>
+<span class="nc" id="L62">					return new UsernamePasswordAuthenticationToken(user, null, new ArrayList&lt;&gt;());</span>
+				}
+<span class="nc" id="L64">			} catch (JwtException ex) {</span>
+<span class="nc" id="L65">				return null;</span>
+			}
+<span class="nc" id="L67">			LOGGER.info(&quot;UsernamePasswordAuthenticationToken try END&quot;);</span>
+<span class="nc" id="L68">			return null;</span>
+		}
+<span class="nc" id="L70">		LOGGER.info(&quot;UsernamePasswordAuthenticationToken END&quot;);</span>
+<span class="nc" id="L71">		return null;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Merged (19 Dec, 2019 7:28:50 PM)</div></body></html>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (19 Dec, 2019 7:28:50 PM)</a> &gt; <a href="../../index.html" class="el_group">authentication-service</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.cognizant.authenticationservice.model</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package com.cognizant.authenticationservice.model;
+
+
+
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Entity
+@Table(name = &quot;user&quot;)
+public class User {
+<span class="fc" id="L26">	private static final Logger LOGGER = LoggerFactory.getLogger(Role.class);</span>
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = &quot;us_id&quot;)
+	private int id;
+
+	@NotNull
+	@Size(min = 2, message = &quot;Atleast 2 characters are required&quot;)
+	@Column(name = &quot;us_username&quot;)
+	String username;
+	
+	@NotNull
+	@Column(name = &quot;us_password&quot;)
+	String password;
+		
+	@NotNull
+	@Column(name=&quot;us_email&quot;)
+	String email;
+	
+	@NotNull
+	@Column(name=&quot;us_contact_number&quot;)
+	String contactNumber;
+	
+	@NotNull
+	@Column(name=&quot;us_confirm&quot;)
+	boolean confirm;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = &quot;user_has_role&quot;, joinColumns = @JoinColumn(name = &quot;ur_us_id&quot;), 
+		inverseJoinColumns = @JoinColumn(name = &quot;ur_ro_id&quot;))
+	private Set&lt;Role&gt; roleList;	
+
+	public User() {
+<span class="fc" id="L59">		super();</span>
+<span class="fc" id="L60">	}</span>
+	
+	public User(int id, @NotNull @Size(min = 2, message = &quot;Atleast 2 characters are required&quot;) String username,
+			@NotNull String password,  @NotNull String email, @NotNull String contactNumber,
+			Set&lt;Role&gt; roleList) {
+<span class="nc" id="L65">		super();</span>
+<span class="nc" id="L66">		LOGGER.info(&quot;user Model Start-&gt;End&quot;);</span>
+<span class="nc" id="L67">		this.id = id;</span>
+<span class="nc" id="L68">		this.username = username;</span>
+<span class="nc" id="L69">		this.password = password;</span>
+<span class="nc" id="L70">		this.email = email;</span>
+<span class="nc" id="L71">		this.contactNumber = contactNumber;</span>
+<span class="nc" id="L72">		this.roleList = roleList;</span>
+<span class="nc" id="L73">	}</span>
+
+	public User(@NotNull @Size(min = 2, message = &quot;Atleast 2 characters are required&quot;) String username,
+			@NotNull String password, @NotNull String email, @NotNull String contactNumber,
+			Set&lt;Role&gt; roleList) {
+<span class="fc" id="L78">		super();</span>
+<span class="fc" id="L79">		this.username = username;</span>
+<span class="fc" id="L80">		this.password = password;</span>
+<span class="fc" id="L81">		this.email = email;</span>
+<span class="fc" id="L82">		this.contactNumber = contactNumber;</span>
+<span class="fc" id="L83">		this.roleList = roleList;</span>
+<span class="fc" id="L84">	}</span>
+	
+	
+	public User(int id, @NotNull @Size(min = 2, message = &quot;Atleast 2 characters are required&quot;) String username,
+			@NotNull String password, @NotNull String email, @NotNull String contactNumber, @NotNull boolean confirm,
+			Set&lt;Role&gt; roleList) {
+<span class="fc" id="L90">		super();</span>
+<span class="fc" id="L91">		this.id = id;</span>
+<span class="fc" id="L92">		this.username = username;</span>
+<span class="fc" id="L93">		this.password = password;</span>
+<span class="fc" id="L94">		this.email = email;</span>
+<span class="fc" id="L95">		this.contactNumber = contactNumber;</span>
+<span class="fc" id="L96">		this.confirm = confirm;</span>
+<span class="fc" id="L97">		this.roleList = roleList;</span>
+<span class="fc" id="L98">	}</span>
+
+	public int getId() {
+<span class="fc" id="L101">		return id; </span>
+	}
+
+	public void setId(int id) {
+<span class="nc" id="L105">		this.id = id;</span>
+<span class="nc" id="L106">	}</span>
+
+	public String getUsername() {
+<span class="nc" id="L109">		return username;</span>
+	}
+
+	public void setUsername(String username) {
+<span class="nc" id="L113">		this.username = username;</span>
+<span class="nc" id="L114">	}</span>
+
+	public String getPassword() {
+<span class="fc" id="L117">		return password;</span>
+	}
+
+	public void setPassword(String password) {
+<span class="nc" id="L121">		this.password = password;</span>
+<span class="nc" id="L122">	}</span>
+
+	
+	public String getEmail() {
+<span class="nc" id="L126">		return email;</span>
+	}
+
+	public void setEmail(String email) {
+<span class="nc" id="L130">		this.email = email;</span>
+<span class="nc" id="L131">	}</span>
+
+	public String getContactNumber() {
+<span class="nc" id="L134">		return contactNumber;</span>
+	}
+
+	public void setContactNumber(String contactNumber) {
+<span class="nc" id="L138">		this.contactNumber = contactNumber;</span>
+<span class="nc" id="L139">	}</span>
+
+	public Set&lt;Role&gt; getRoleList() {
+<span class="fc" id="L142">		return roleList;</span>
+	}
+
+	public void setRoleList(Set&lt;Role&gt; roleList) {
+<span class="nc" id="L146">		this.roleList = roleList;</span>
+<span class="nc" id="L147">	}</span>
+
+	public boolean isConfirm() {
+<span class="nc" id="L150">		return confirm;</span>
+	}
+
+	public void setConfirm(boolean confirm) {
+<span class="fc" id="L154">		this.confirm = confirm;</span>
+<span class="fc" id="L155">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Merged (19 Dec, 2019 7:28:50 PM)</div></body></html>

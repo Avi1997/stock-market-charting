@@ -1,0 +1,24 @@
+<div class=" row extra-margin-top-hospital extra-margin-bottom">
+    <div *ngIf="dataLoaded | async" class="container col-6">
+            <div class="container mb-2">
+                <h3>Select Company Code : </h3>
+            </div>
+            <div class="container mb-2">
+                <select class="form-control"
+                    (change)="filterSelectedData($event.target.value)">
+                    <option value="true" selected disabled>Select first Company</option>
+                    <option *ngFor="let company of companies" value="{{company.companyCode}}">{{company.companyCode}}
+                    </option>
+                </select>
+            </div>
+        
+    </div>
+    
+    <div id="showdata" class="col-12 ">
+
+    </div>
+
+    <div class="container justify-content-center d-flex" *ngIf="clickFlag"> 
+            <button (click)="downlaodExcel()" class="btn btn-primary text-alignment ">Download Data</button>
+            </div>
+</div>

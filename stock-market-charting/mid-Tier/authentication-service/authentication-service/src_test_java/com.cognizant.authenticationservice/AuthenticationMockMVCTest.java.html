@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AuthenticationMockMVCTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (19 Dec, 2019 7:28:50 PM)</a> &gt; <a href="../../index.html" class="el_group">authentication-service</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.cognizant.authenticationservice</a> &gt; <span class="el_source">AuthenticationMockMVCTest.java</span></div><h1>AuthenticationMockMVCTest.java</h1><pre class="source lang-java linenums">package com.cognizant.authenticationservice;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.cognizant.authenticationservice.dto.UserDto;
+import com.cognizant.authenticationservice.security.AppUserDetailsService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@ExtendWith(SpringExtension.class)
+@AutoConfigureMockMvc
+@SpringBootTest
+<span class="fc" id="L22">public class AuthenticationMockMVCTest {</span>
+
+	@Autowired
+	AppUserDetailsService appUserDetailsService;
+	
+	@Autowired
+	private MockMvc mockMvc;
+
+	
+	@Test
+	public void addUser() throws Exception {			
+<span class="fc" id="L33">		mockMvc.perform(MockMvcRequestBuilders.post(&quot;/stock-market/sign-up&quot;)</span>
+<span class="fc" id="L34">				.content(asJsonString(new UserDto(&quot;uhdfrf&quot;,&quot;passwoe&quot;,&quot;adsmin@gmail.com&quot;,&quot;1234567890&quot;,1)))</span>
+<span class="fc" id="L35">				.contentType(MediaType.APPLICATION_JSON)</span>
+<span class="fc" id="L36">				.accept(MediaType.APPLICATION_JSON))</span>
+<span class="fc" id="L37">				.andExpect(status().isOk());				</span>
+<span class="fc" id="L38">	}</span>
+	public static String asJsonString(final Object obj) {
+		try {
+<span class="fc" id="L41">			return new ObjectMapper().writeValueAsString(obj);</span>
+<span class="nc" id="L42">		} catch (Exception e) {</span>
+<span class="nc" id="L43">			throw new RuntimeException(e);</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>Merged (19 Dec, 2019 7:28:50 PM)</div></body></html>

@@ -1,0 +1,66 @@
+<div class="container-fluid p-5">
+    <h1 class="container" *ngIf="!searchFlag">Companies :</h1>
+    <h1 class="container" *ngIf="searchFlag">Search Result :</h1>
+    <div class="alert alert-warning p-4" *ngIf="emptyFlag">
+        <strong>
+            No Company Present.
+        </strong>
+    </div>
+
+
+    <div class="accordion container mt-3" id="accordionExample2" *ngIf="!emptyFlag">
+        <div class="card shadow" *ngFor="let company of companies">
+            <div class="card-header color-nav p-1" id="heading">
+                <h3 class="mb-0 text-white ">
+                    <span class="p-3"> {{company.name}}</span>
+                    <button class="btn btn-link text-warning float-right" type="button" data-toggle="collapse"
+                        [attr.data-target]="'#usid'+ company.id" (click)="latestStockPrice(company.companyCode)">
+                        show-details
+                    </button>
+                </h3>
+            </div>
+
+            <div [attr.id]="'usid'+ company.id" class="collapse" data-parent="#accordionExample2">
+                <div class="card-body text-center">
+                    <h4 class="card-text text-uppercase">
+                        <i class="material-icons text-warning pb-2">account_circle</i>  
+                         {{company.ceo}} 
+                         <span class="text-muted small">(ceo)</span>
+                        </h4>
+                        <h6 class="card-text"><i class="material-icons text-warning">stars</i>Current Stock Market Price : 
+                                <span *ngFor="let x of latestArray">
+                                        <i class="material-icons text-warning pb-2">bar_chart</i>
+                                        {{x.stockExchange}}
+                                        $
+                                        {{x.currentPrice|number}} 
+                                       
+                                     </span>
+                            </h6>
+                    <h5 class="card-text text-left">
+                        <i class="material-icons text-warning pb-2">monetization_on</i> 
+                       $ {{company.turnover | number}}<span class="text-muted small p-1">(Turnover)</span>
+                       <span class="text-muted mt-3 small float-right">(Boards)</span>
+                       <span *ngFor="let board of company.boardOfDirectorsList" class="p-2 font-weight-bold text-uppercase float-right">
+                            <i class="material-icons text-warning pb-2">people</i>   {{board.name}}
+                        </span>
+                        
+                    </h5>
+                   
+                    <h5 class="card-text text-left ">
+                        <i class="material-icons text-warning pb-2">apartment</i>{{company.sector.sectorName}}  
+                        <span class="text-muted small">(Sector)</span>
+                    </h5>
+                    
+                    <ul class="card-text font-weight-bold list-unstyled">
+                        <li *ngFor="let stock of company.stockExchanges">
+                                <i class="material-icons text-warning pb-2">bar_chart</i>
+                            {{stock.name}} 
+                            <span class="text-muted small">(stocks)</span>
+                        </li>
+                    </ul>
+                    <p class="card-text"><i class="material-icons text-warning pb-1 pr-2">info_outline</i>{{company.aboutCompany}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

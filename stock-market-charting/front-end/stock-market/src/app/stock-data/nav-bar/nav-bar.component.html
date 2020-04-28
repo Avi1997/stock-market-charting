@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-md  color-nav shadow   navbar-dark fixed-top   px-2 py-3" id="header">
+    <a routerLink="" class="navbar-brand   font-weight-normal"><i
+            class="material-icons mr-2 pb-1 font-weight-bolder">bar_chart</i>Stock Market</a>
+    <button class="navbar-toggler outline-none border border-0" (click) ="dropDownButtonClick()" type="button" data-toggle="collapse"
+        data-target="#nav-list">
+        <i class="material-icons mr-2   pl-3" >{{navbarIcon}}</i>
+    </button>
+    <div class="navbar-collapse collapse " id="nav-list">
+        <ul class="navbar-nav  ml-auto ">
+            <li class="nav-item font-weight-bold" *ngIf="true">
+                       <a  routerLink="" class="nav-link text-white">Home</a>
+            </li>            
+            <li class="nav-item" *ngIf=" isLogin()">
+                <a routerLink ="/user" class="nav-link font-weight-bold text-white "><i
+                        class="material-icons mr-1 mb-2">person</i> {{user}}</a>
+
+            </li>
+            <li class="nav-item" *ngIf="!isLogin()">
+                <a class="nav-link  font-weight-bold text-white" routerLink="/login">Log In</a>
+            </li>
+            <li class="nav-item" *ngIf="!isLogin()">
+                    <a class="nav-link  font-weight-bold text-white"  routerLink="/sign-up">Sign Up</a>
+            </li>            
+            <li class="nav-item font-weight-bold " *ngIf="isLogin()">
+                <a class="nav-link  mb-2 text-white" (click)="logout()" routerLink="">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<footer class="footer color-nav text-white text-center px-3 py-2 fixed-bottom">
+   &copy; Copyright
+</footer>

@@ -1,0 +1,25 @@
+<div class="container extra-margin-top-hospital border-danger" *ngIf="!uploadFlag">
+  <label class="font-weight-bold">File Details</label>
+  <div class="custom-file">
+  <input type="file" class="custom-file-input" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx,.xlsx"/>
+  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+</div>
+</div>
+<div class="container mt-2" *ngIf="invalidFormatFlag">
+<div class="alert alert-danger font-weight-bold">
+  Invalid Excel Format.
+</div>
+</div>
+<div *ngIf="uploadFlag" class="container  extra-margin-top-hospital">
+    <ul class="list-group">
+        <li class="list-group-item font-weight-bold active">Details</li>
+        <li class="list-group-item font-weight-bold ">Files Uploaded :<span class="float-right">{{summary.noOfRecords}}</span></li>
+        <li class="list-group-item font-weight-bold">Company Name :<span class="float-right">{{summary.companyName}}</span></li>
+        <li class="list-group-item font-weight-bold">Stock Exchange :<span class="float-right">{{summary.stockExchange}}</span></li>
+        <li class="list-group-item font-weight-bold">From Date :<span class="float-right">{{summary.minDate | date:'dd/MM/yyyy'}}</span></li>
+        <li class="list-group-item font-weight-bold">To Date :<span class="float-right">{{summary.maxDate | date:'dd/MM/yyyy'}}</span></li>
+      </ul>
+      <div class="d-flex justify-content-center mt-3">
+             <button class="btn btn-success px-4 py-2" routerLink=""> ok </button>
+      </div>
+</div>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>CompanyDTO.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">ServicesTesting (19 Dec, 2019 7:29:33 PM)</a> &gt; <a href="../../index.html" class="el_group">company-service</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.cognizant.stockmarket.companyservice.model</a> &gt; <span class="el_source">CompanyDTO.java</span></div><h1>CompanyDTO.java</h1><pre class="source lang-java linenums">package com.cognizant.stockmarket.companyservice.model;
+
+import java.util.List;
+import java.util.Set;
+
+
+
+public class CompanyDTO {
+
+	private int id;
+	
+
+
+	private Long companyCode;
+	
+
+	private String name;
+	
+	
+	private Long turnover;
+	
+	
+	private String ceo;
+	
+
+	private List&lt;BoardOfDirectors&gt; boardOfDirectorsList;
+	
+
+	private boolean listed;
+	
+
+	private Sector sector;
+
+	private String aboutCompany;
+
+	private Set&lt;StockExchange&gt; stockExchanges;
+	
+	public Set&lt;StockExchange&gt; getStockExchanges() {
+<span class="nc" id="L39">		return stockExchanges;</span>
+	}
+
+	public void setStockExchanges(Set&lt;StockExchange&gt; stockExchanges) {
+<span class="nc" id="L43">		this.stockExchanges = stockExchanges;</span>
+<span class="nc" id="L44">	}</span>
+
+	public CompanyDTO() {
+<span class="nc" id="L47">		super();</span>
+<span class="nc" id="L48">		}</span>
+
+	public int getId() {
+<span class="nc" id="L51">		return id;</span>
+	}
+
+	public void setId(int id) {
+<span class="nc" id="L55">		this.id = id;</span>
+<span class="nc" id="L56">	}</span>
+
+	public Long getCompanyCode() {
+<span class="nc" id="L59">		return companyCode;</span>
+	}
+
+	public void setCompanyCode(Long companyCode) {
+<span class="nc" id="L63">		this.companyCode = companyCode;</span>
+<span class="nc" id="L64">	}</span>
+
+	public String getName() {
+<span class="nc" id="L67">		return name;</span>
+	}
+
+	public void setName(String name) {
+<span class="nc" id="L71">		this.name = name;</span>
+<span class="nc" id="L72">	}</span>
+
+	public Long getTurnover() {
+<span class="nc" id="L75">		return turnover;</span>
+	}
+
+	public void setTurnover(Long turnover) {
+<span class="nc" id="L79">		this.turnover = turnover;</span>
+<span class="nc" id="L80">	}</span>
+
+	public String getCeo() {
+<span class="nc" id="L83">		return ceo;</span>
+	}
+
+	public void setCeo(String ceo) {
+<span class="nc" id="L87">		this.ceo = ceo;</span>
+<span class="nc" id="L88">	}</span>
+
+	public List&lt;BoardOfDirectors&gt; getBoardOfDirectorsList() {
+<span class="nc" id="L91">		return boardOfDirectorsList;</span>
+	}
+
+	public void setBoardOfDirectorsList(List&lt;BoardOfDirectors&gt; boardOfDirectorsList) {
+<span class="nc" id="L95">		this.boardOfDirectorsList = boardOfDirectorsList;</span>
+<span class="nc" id="L96">	}</span>
+
+	public boolean isListed() {
+<span class="nc" id="L99">		return listed;</span>
+	}
+
+	public void setListed(boolean listed) {
+<span class="nc" id="L103">		this.listed = listed;</span>
+<span class="nc" id="L104">	}</span>
+
+	public Sector getSector() {
+<span class="nc" id="L107">		return sector;</span>
+	}
+
+	public void setSector(Sector sector) {
+<span class="nc" id="L111">		this.sector = sector;</span>
+<span class="nc" id="L112">	}</span>
+
+	public String getAboutCompany() {
+<span class="nc" id="L115">		return aboutCompany;</span>
+	}
+
+	public void setAboutCompany(String aboutCompany) {
+<span class="nc" id="L119">		this.aboutCompany = aboutCompany;</span>
+<span class="nc" id="L120">	}</span>
+
+	public CompanyDTO(int id, Long companyCode, String name, Long turnover, String ceo,
+			List&lt;BoardOfDirectors&gt; boardOfDirectorsList, boolean listed, Sector sector, String aboutCompany,
+			Set&lt;StockExchange&gt; stockExchanges) {
+<span class="nc" id="L125">		super();</span>
+<span class="nc" id="L126">		this.id = id;</span>
+<span class="nc" id="L127">		this.companyCode = companyCode;</span>
+<span class="nc" id="L128">		this.name = name;</span>
+<span class="nc" id="L129">		this.turnover = turnover;</span>
+<span class="nc" id="L130">		this.ceo = ceo;</span>
+<span class="nc" id="L131">		this.boardOfDirectorsList = boardOfDirectorsList;</span>
+<span class="nc" id="L132">		this.listed = listed;</span>
+<span class="nc" id="L133">		this.sector = sector;</span>
+<span class="nc" id="L134">		this.aboutCompany = aboutCompany;</span>
+<span class="nc" id="L135">		this.stockExchanges = stockExchanges;</span>
+<span class="nc" id="L136">	}</span>
+
+
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>ServicesTesting (19 Dec, 2019 7:29:33 PM)</div></body></html>
